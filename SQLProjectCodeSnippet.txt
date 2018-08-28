@@ -1,0 +1,10 @@
+DECLARE @todaydate DATE
+SET @todaydate = GETDATE()
+select title, borrower_name, borrower_address, due_date from tbl_book
+   INNER JOIN tbl_book_loans ON tbl_book_loans.book_id = tbl_book.book_id
+   INNER JOIN tbl_borrower ON tbl_borrower.card_no = tbl_book_loans.card_no
+   INNER JOIN tbl_library_branch ON tbl_library_branch.branch_id = tbl_book_loans.branch_id
+   WHERE 
+   branch_name='Sharpstown' AND
+   due_date = @todaydate 
+;
